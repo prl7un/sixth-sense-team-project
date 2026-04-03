@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
+          push: true 
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
