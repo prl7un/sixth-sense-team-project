@@ -33,7 +33,7 @@ jobs:
       # 3. [추가된 단계] Kustomize로 태그 수정
       - name: Update Kustomize image tag
         run: |
-          cd cluster\workloads\apps\doc-converter\overlays\dev
+          cd SIXTH_SENSE_TEAM_PJORECT\cluster\workloads\apps\doc-converter\overlays\dev
           # 'my-app-image'는 patch-image.yaml에 적힌 이름과 똑같이 맞추세요!
           kustomize edit set image my-app-image=${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
 
