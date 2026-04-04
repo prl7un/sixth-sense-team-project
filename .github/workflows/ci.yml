@@ -24,7 +24,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: app
+          file: app/doc-converter/Dockerfile
           push: true 
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:latest
