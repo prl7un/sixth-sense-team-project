@@ -1,13 +1,17 @@
-# dev 환경용 Doc Converter 오버레이.
+# dev 환경용 Doc Converter 오버레이
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: apps
 resources:
-  - ../../base
-  - service-metrics-nodeport.yaml
+- ../../base
+- service-metrics-nodeport.yaml
 patches:
-  - path: patch-image.yaml
-  - path: patch-replicas.yaml
-  - path: patch-resources.yaml
-  - path: patch-tolerations.yaml
+- path: patch-image.yaml
+- path: patch-replicas.yaml
+- path: patch-resources.yaml
+- path: patch-tolerations.yaml
+images:
+- name: my-app-image
+  newName: prl7un/teamproject2app
+  newTag: e2e8a6d9f6945659ffd59580492bf8f04f6e6782
