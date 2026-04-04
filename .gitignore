@@ -18,30 +18,44 @@ terraform.rc
 # Python caches, test artifacts, and virtual environments
 **/__pycache__/
 *.py[cod]
+*$py.class
+.Python
 .venv/
 venv/
+env/
 .tox/
 .nox/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.cache/
 .coverage
 .coverage.*
 .hypothesis/
 build/
 dist/
 *.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
 
 # Local environment files and secrets
 .env
 .env.*
 *.pem
 *.key
+*.pub
 cluster/references/bootstrap-inputs/*.local.yaml
 cluster/references/bootstrap-inputs/*.input.yaml
 cluster/references/bootstrap-inputs/disabled/*.input.yaml
 
-# Editor swap, backup, and local temp files
+# Logs, swap, backup, and local temp files
+*.log
+logs/
+log/
+nohup.out
+*.out
+*.err
 *.swp
 *.swo
 *.tmp
@@ -56,3 +70,4 @@ cluster/references/bootstrap-inputs/disabled/*.input.yaml
 .idea/
 .DS_Store
 Thumbs.db
+desktop.ini
