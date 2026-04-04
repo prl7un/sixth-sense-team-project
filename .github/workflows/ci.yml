@@ -2,6 +2,11 @@ name: CI/CD Pipeline # 이름은 자유롭게 정하셔도 됩니다.
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - 'app/doc-converter/**'
+      - '.github/workflows/ci.yml'
 
 permissions:
   contents: write # 4번 단계를 위해 반드시 필요합니다.
@@ -43,6 +48,7 @@ jobs:
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add .
+          git add cluster/workloads/apps/doc-converter/overlays/dev/kustomization.yaml
+          git diff --cached --quiet && exit 0
           git commit -m "chore: update image tag to ${{ github.sha }}"
           git push
