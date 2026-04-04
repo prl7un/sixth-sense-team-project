@@ -45,4 +45,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git add .
           git commit -m "chore: update image tag to ${{ github.sha }}"
-          git push
+          git push origin HEAD:${{ github.ref_name }}
