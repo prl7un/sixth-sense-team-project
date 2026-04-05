@@ -7,11 +7,10 @@ resources:
 - ../../base
 - service-metrics-nodeport.yaml
 patches:
-- path: patch-image.yaml
 - path: patch-replicas.yaml
 - path: patch-resources.yaml
 - path: patch-tolerations.yaml
 images:
-- name: my-app-image
+- name: doc-converter-image
   newName: prl7un/teamproject2app
   newTag: d080201636696b03d85409b59563a0d6906cd900

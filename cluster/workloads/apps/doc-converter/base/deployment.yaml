@@ -34,7 +34,7 @@ spec:
           emptyDir: {}
       containers:
         - name: doc-converter
-          image: placeholder.invalid/doc-converter:dev
+          image: doc-converter-image:dev
           imagePullPolicy: IfNotPresent #같은 태그 있으면 캐시된 image 받음
           ports:
             - containerPort: 8000

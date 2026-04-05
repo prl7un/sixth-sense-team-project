@@ -50,8 +50,8 @@ jobs:
       - name: Update Kustomize image tag
         run: |
           cd cluster/workloads/apps/doc-converter/overlays/dev
-          # 'my-app-image'는 patch-image.yaml에 적힌 이름과 똑같이 맞추세요!
-          kustomize edit set image my-app-image=${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
+          # doc-converter-image 변경
+          kustomize edit set image doc-converter-image=${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
 
       # 4. [추가된 단계] 수정된 kustomization.yaml을 GitHub에 다시 푸시1
       - name: Commit and Push to GitHub
