@@ -3,7 +3,7 @@ name: CI/CD Pipeline # 이름은 자유롭게 정하셔도 됩니다.
 on:
   push:
     branches:
-      - main
+      - '**'
     paths:
       - 'app/doc-converter/**'
       - '.github/workflows/ci.yml'
@@ -35,6 +35,16 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
+
+      # Trivy 취약점 스캔
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.35.0  # 안전이 검증된 최신 버전
+        with:
+          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}'
+          format: 'table'      # 터미널에서 보기 편한 테이블 형식
+          exit-code: '0'       # 심각한 취약점 발견 시 파이프라인 중단 (0은 통과, 1은 중단)
+          ignore-unfixed: true # 패치 방법이 없는 취약점은 제외 (실제 해결 가능한 것만 집중)
+          severity: 'CRITICAL,HIGH' # 심각(Critical) 및 높음(High) 단계만 체크
 
       # 3. [추가된 단계] Kustomize로 태그 수정
       - name: Update Kustomize image tag
