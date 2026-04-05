@@ -14,4 +14,4 @@ patches:
 images:
 - name: my-app-image
   newName: prl7un/teamproject2app
-  newTag: 09305757bce2da280a386bdf0e668ad1f40264ed
+  newTag: 164efe525de377354d045d114b6f9082ff7fa3d7

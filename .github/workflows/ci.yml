@@ -3,7 +3,7 @@ name: CI/CD Pipeline # 이름은 자유롭게 정하셔도 됩니다.
 on:
   push:
     branches:
-      - '**'
+      - 'main'
     paths:
       - 'app/doc-converter/**'
       - '.github/workflows/ci.yml'
