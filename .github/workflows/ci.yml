@@ -41,7 +41,6 @@ jobs:
         uses: aquasecurity/trivy-action@v0.35.0  # 안전이 검증된 최신 버전
         with:
           image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}'
-          trivy-version: '0.69.3' #v를 제외하고 입력
           format: 'table'      # 터미널에서 보기 편한 테이블 형식
           exit-code: '0'       # 심각한 취약점 발견 시 파이프라인 중단 (0은 통과, 1은 중단)
           ignore-unfixed: true # 패치 방법이 없는 취약점은 제외 (실제 해결 가능한 것만 집중)
