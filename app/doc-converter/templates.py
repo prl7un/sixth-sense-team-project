@@ -83,6 +83,7 @@ HTML_HEADER = """
 
     <header class="gradient-bg py-24 text-white text-center">
         <div class="max-w-5xl mx-auto px-6">
+            <div class="inline-flex items-center px-5 py-2 mb-6 rounded-full bg-white/20 border border-white/40 text-sm font-black tracking-[0.35em] uppercase">DEPLOYMENT TEST</div>
             <h1 class="text-6xl font-black tracking-tight leading-tight font-poppins mb-6">단 한 번의 드래그로,<br>모든 문서를 <span class="text-yellow-300">완벽한 PDF</span>로</h1>
             <p class="text-xl font-light opacity-90"> IT 엔지니어를 위한 듀얼 엔진 PDF 통합 변환 서비스</p>
         </div>

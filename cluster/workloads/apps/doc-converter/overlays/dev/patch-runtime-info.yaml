@@ -9,7 +9,7 @@ spec:
         - name: doc-converter
           env:
             - name: APP_RELEASE
-              value: demo-v1
+              value: demo-v2
             - name: POD_NAME
               valueFrom:
                 fieldRef:
