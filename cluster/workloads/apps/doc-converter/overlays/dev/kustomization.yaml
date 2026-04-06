@@ -10,6 +10,7 @@ patches:
 - path: patch-replicas.yaml
 - path: patch-resources.yaml
 - path: patch-tolerations.yaml
+- path: patch-runtime-info.yaml
 images:
 - name: doc-converter-image
   newName: prl7un/teamproject2app

@@ -2,6 +2,7 @@ import os
 import uuid
 import shutil
 import logging
+from datetime import datetime, timezone
 import time  # 성능 측정을 위해 추가
 from typing import Optional, List
 
@@ -87,6 +88,17 @@ async def health_check():
 @app.get("/ready", status_code=status.HTTP_200_OK)
 async def readiness_check():
     return {"status": "ready"}
+
+
+@app.get("/whoami", status_code=status.HTTP_200_OK)
+async def whoami():
+    return {
+        "service": "SixSense-Doc-Converter",
+        "release": os.getenv("APP_RELEASE", "demo-v1"),
+        "pod": os.getenv("POD_NAME") or os.getenv("HOSTNAME", "unknown"),
+        "node": os.getenv("NODE_NAME", "unknown"),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
 
 
 # -------------------------------
