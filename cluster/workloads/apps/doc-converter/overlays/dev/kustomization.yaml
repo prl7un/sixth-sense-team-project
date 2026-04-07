@@ -14,4 +14,4 @@ patches:
 images:
 - name: doc-converter-image
   newName: prl7un/teamproject2app
-  newTag: 172011d288a74d4af35cbfae9a2e5f88d3dcb722
+  newTag: 113ad3109bc2d5243537fd427a96faa8f55b3ff0
