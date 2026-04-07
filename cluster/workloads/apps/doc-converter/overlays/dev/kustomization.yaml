@@ -7,7 +7,6 @@ resources:
 - ../../base
 - service-metrics-nodeport.yaml
 patches:
-- path: patch-replicas.yaml
 - path: patch-resources.yaml
 - path: patch-tolerations.yaml
 - path: patch-runtime-info.yaml
