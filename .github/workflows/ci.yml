@@ -24,27 +24,43 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # 2. 이미지 빌드 및 본인 레포지토리로 푸시
-      - name: Build and push Docker image
+      
+      # 2. 이미지 빌드
+      - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
           context: app/doc-converter
           file: app/doc-converter/Dockerfile
-          push: true 
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
+          load: true
+          push: false
+      
 
       # Trivy 취약점 스캔
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner (report results)
         uses: aquasecurity/trivy-action@v0.35.0  # 안전이 검증된 최신 버전
         with:
           image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}'
-          format: 'table'      # 터미널에서 보기 편한 테이블 형식
-          exit-code: '0'       # 심각한 취약점 발견 시 파이프라인 중단 (0은 통과, 1은 중단)
-          ignore-unfixed: true # 패치 방법이 없는 취약점은 제외 (실제 해결 가능한 것만 집중)
-          severity: 'CRITICAL,HIGH' # 심각(Critical) 및 높음(High) 단계만 체크
+          format: 'table'           # 터미널에서 보기 편한 테이블 형식
+          severity: 'CRITICAL,HIGH' # 심각 및 높음(High) 단계 체크
+          exit-code: '0'            # 워크플로 중단 X ('0'은 통과, '1'은 중단)
+          ignore-unfixed: false     # 수정되었는지와 관계 없이 리포트 확인
+
+      - name: Run Trivy vulnerability scanner (block on CRITICAL)
+        uses: aquasecurity/trivy-action@v0.35.0  # 안전이 검증된 최신 버전
+        with:
+          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}'
+          severity: 'CRITICAL'  # 심각(Critical) 단계
+          exit-code: '1'        # 해당 취약점 발생시 워크플로 중단
+          ignore-unfixed: false # unfixed 여부와 관계 없이 차단
+
+      # 도커 이미지 push
+      - name: Push image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/teamproject2app:${{ github.sha }}
 
       # 3. [추가된 단계] Kustomize로 태그 수정
       - name: Update Kustomize image tag
