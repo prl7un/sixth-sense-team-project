@@ -1,3 +1,4 @@
+# App of Apps 진입점으로, 하위 애플리케이션을 sync-wave 순서대로 동기화한다.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
